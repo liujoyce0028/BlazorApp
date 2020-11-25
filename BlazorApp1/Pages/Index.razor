@@ -1,0 +1,113 @@
+﻿@page "/"
+
+<h1>Hello, world JL! 234</h1>
+
+Welcome to your new app.
+
+<br />
+
+<SurveyPrompt Title="How is Blazor working for you? as 123" />
+<p>
+    Name: @p1.SalesPerson
+</p>
+<p>
+    Amount: @p1.Amount.ToString()
+</p>
+<p>
+    <input  type="number" @bind="p1.Amount" />
+
+    <input @bind-value="p1.Amount" />
+
+    <input @bind="p1.Amount" @bind:event="oninput" />
+</p>
+
+<p>
+    <input type="checkbox" @bind="p1.isActive" /> @p1.isActive
+</p>
+
+<p>
+    <input type="radio" value="1" name="group"  
+           checked="@(selectedGroup==1)"
+           @onclick="@(()=>selectedGroup=1)"/>1
+    <input type="radio" value="2" name="group"  
+           checked="@(selectedGroup==2)"
+           @onclick="@(()=>selectedGroup=2)"/>2
+</p> @selectedGroup
+
+
+<p>
+    <select @bind="selectedLocationId">
+        @foreach (var loc in p1.Locations) 
+        {
+            <option value="@loc.Id">@loc.City</option>
+        }
+    </select>
+</p>
+
+<p>
+    <ul>
+        @foreach(var loc in p1.Locations)
+        {
+            <li>@loc.City, @loc.ProvState, @loc.Country</li>
+        }
+    </ul>
+</p>
+
+<p>
+    <table>
+        @foreach (var loc in p1.Locations)
+        {
+        <tr>
+            <td>@loc.Id</td>
+            <td><input @bind="@loc.City" @bind:event="oninput"></td>
+            <td>@loc.ProvState</td>
+            <td>@loc.Country</td>
+
+        </tr>
+        }
+    </table>
+</p>
+
+@code{
+
+    IndexViewModel p1 = null;
+
+    int selectedGroup = 1;
+
+    int selectedLocationId = 0;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        p1 = new IndexViewModel
+        {
+            SalesPerson = "John2",
+            Amount = 15000,
+            Locations = new List<Location>
+            {
+                new Location{Id=1,City="Toronto", ProvState="Ontario", Country="Canada"},
+                new Location{Id=2,City="Montreal", ProvState="Quebec", Country="Canada"}
+            }
+
+        };
+    }
+
+
+
+    class IndexViewModel
+    {
+
+        public string SalesPerson { get; set; }
+        public double Amount { get; set; }
+        public bool isActive { get; set; }
+        public List<Location> Locations { get; set; }
+    }
+
+    class Location
+    {
+        public int Id { get; set; }
+        public string City { get; set; }
+        public string ProvState { get; set; }
+        public string Country { get; set; }
+    }
+}
