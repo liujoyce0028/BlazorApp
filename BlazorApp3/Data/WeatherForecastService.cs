@@ -14,6 +14,9 @@ namespace BlazorApp3.Data
         private static int _rndInt;
         public event PropertyChangedEventHandler PropertyChanged;
 
+        public event Action OnChange;
+
+        private void NotifyStateChanged() => OnChange?.Invoke();
 
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {

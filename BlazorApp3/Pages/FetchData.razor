@@ -3,7 +3,7 @@
 @using BlazorApp3.Data
 @inject WeatherForecastService ForecastService
 
-<h1>Weather forecast</h1>
+<h1>Weather forecast  @ForecastService.RndInt</h1>
 
 <p>This component demonstrates fetching data from a service.</p>
 
@@ -48,6 +48,22 @@ else
 </div>
 
 @code {
+
+    private System.Timers.Timer _timer;
+    [Parameter]
+    public double Interval { get; set; }
+    protected override void OnInitialized()
+    {
+        Interval = 1000;
+        _timer = new System.Timers.Timer(this.Interval);
+        _timer.Elapsed += async (s, e) =>
+        {
+            await InvokeAsync(StateHasChanged);
+        };
+        _timer.Enabled = true;
+    }
+
+
     private WeatherForecast[] forecasts;
 
     private WeatherForecastService service1 = new WeatherForecastService();
@@ -56,7 +72,9 @@ else
 
     protected override async Task OnInitializedAsync()
     {
+
         forecasts = await ForecastService.GetForecastAsync(DateTime.Now);
+
     }
 
     private void getInt()
