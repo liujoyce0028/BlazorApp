@@ -36,12 +36,7 @@ else
     </table>
 }
 
-<div>
-    it is a test:
-   @rndInt
 
-    <button @onclick="getInt">  @rndInt</button>
-</div>
 
 <div>
     @ForecastService.RndInt
@@ -50,11 +45,12 @@ else
 @code {
 
     private System.Timers.Timer _timer;
+    
     [Parameter]
     public double Interval { get; set; }
     protected override void OnInitialized()
     {
-        Interval = 1000;
+        Interval = 100;
         _timer = new System.Timers.Timer(this.Interval);
         _timer.Elapsed += async (s, e) =>
         {
@@ -66,9 +62,6 @@ else
 
     private WeatherForecast[] forecasts;
 
-    private WeatherForecastService service1 = new WeatherForecastService();
-
-    private int rndInt;
 
     protected override async Task OnInitializedAsync()
     {
@@ -77,8 +70,4 @@ else
 
     }
 
-    private void getInt()
-    {
-        rndInt=service1.RndInt;
-    }
 }
