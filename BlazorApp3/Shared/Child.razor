@@ -1,0 +1,37 @@
+﻿
+@page "/child"
+
+<div class="card">
+    <div class="card-body">
+        <h3 class="card-title">child component test</h3>
+        <p class="card-text">Child <code>Year</code>: @YearX</p>
+    </div>
+</div>
+
+
+<input  @bind="YearX" @ondblclick="UpdateYearFromChild"/>
+
+
+<input @bind="YearValue" />
+<button @onclick="UpdateYearFromChild"> Update Year From Child</button>
+
+@code {
+    private Random r = new Random();
+
+    private int YearValue;
+
+    [Parameter]
+    public int YearX { get; set; }
+
+    [Parameter]
+    public EventCallback<int> YearXChanged { get; set; }
+
+    private async Task UpdateYearFromChild()
+    {
+
+        await YearXChanged.InvokeAsync(YearX);
+
+        YearValue = YearX;
+    }
+
+}

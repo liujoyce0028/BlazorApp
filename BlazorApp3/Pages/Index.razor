@@ -5,3 +5,19 @@
 Welcome to your new app.
 
 <SurveyPrompt Title="How is Blazor working for you?" />
+<p>
+    <input @bind="currentValue" /> Current value: @currentValue
+</p>
+
+<p>
+    <input value="@currentValue" @onchange="@((ChangeEventArgs e)=>_CurrentValue=e.Value.ToString())" />
+</p>
+<input @bind="currentValue" @bind:event="oninput" />
+<input @bind=@currentValue @bind:event="oninput" />
+
+
+@code {
+    private string currentValue="abc";
+
+    private string _CurrentValue { get; set; }
+}

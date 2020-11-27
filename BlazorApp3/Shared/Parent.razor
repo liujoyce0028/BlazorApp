@@ -1,0 +1,26 @@
+﻿@page "/parent"
+
+
+<h3>Parent</h3>
+
+<p><code>year</code>: @year</p>
+<button @onclick="UpdateYear"><code>year</code></button>
+
+<Child @bind-YearX="year" @bind-YearX:event="YearXChanged"></Child>
+
+
+<h1>Password test</h1>
+<PasswordField @bind-Password="passwordx"></PasswordField>
+
+
+@code {
+
+    private string passwordx;
+
+    private Random r = new Random();
+    private int year = 1000;
+    private void UpdateYear()
+    {
+        year = r.Next(10000, 30000);
+    }
+}

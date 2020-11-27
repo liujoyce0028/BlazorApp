@@ -36,11 +36,31 @@ else
     </table>
 }
 
+<div>
+    it is a test:
+   @rndInt
+
+    <button @onclick="getInt">  @rndInt</button>
+</div>
+
+<div>
+    @ForecastService.RndInt
+</div>
+
 @code {
     private WeatherForecast[] forecasts;
+
+    private WeatherForecastService service1 = new WeatherForecastService();
+
+    private int rndInt;
 
     protected override async Task OnInitializedAsync()
     {
         forecasts = await ForecastService.GetForecastAsync(DateTime.Now);
+    }
+
+    private void getInt()
+    {
+        rndInt=service1.RndInt;
     }
 }

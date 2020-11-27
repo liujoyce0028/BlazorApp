@@ -1,0 +1,10 @@
+﻿@page "/numbermodel"
+
+@using BlazorApp3.Data;
+@inject NumberViewModel numbermodel;
+
+
+<div>
+    <p>Enter the number:</p>
+    <input type="number" @bind="numbermodel.number"/>
+</div>

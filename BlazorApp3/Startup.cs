@@ -31,6 +31,7 @@ namespace BlazorApp3
             services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();
             services.AddSignalR();
+            services.AddSingleton<NumberViewModel>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

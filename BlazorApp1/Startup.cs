@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using BlazorApp1.Data;
 
+
 namespace BlazorApp1
 {
     public class Startup
@@ -29,6 +30,7 @@ namespace BlazorApp1
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();
+       
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
